@@ -27,7 +27,7 @@ def load_cnn_model():
         st.stop()
 
     return load_model(model_path, compile=False)
-
+model = load_cnn_model()
 # ============================================================
 # 🔧 Fungsi bantu
 # ============================================================
@@ -154,4 +154,5 @@ elif st.session_state.page == "deteksi":
     if st.button("⬅️ Kembali ke Halaman Awal"):
         st.session_state.page = "home"
         st.rerun()
+
 
