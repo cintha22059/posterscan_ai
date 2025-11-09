@@ -19,9 +19,14 @@ import base64
 # ============================================================
 @st.cache_resource
 def load_cnn_model():
-    return load_model("best_model_clean.h5", compile=False)
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    model_path = os.path.join(current_dir, "best_model_clean.h5")
 
-model = load_cnn_model()
+    if not os.path.exists(model_path):
+        st.error(f"❌ File model tidak ditemukan di: {model_path}")
+        st.stop()
+
+    return load_model(model_path, compile=False)
 
 # ============================================================
 # 🔧 Fungsi bantu
@@ -149,3 +154,4 @@ elif st.session_state.page == "deteksi":
     if st.button("⬅️ Kembali ke Halaman Awal"):
         st.session_state.page = "home"
         st.rerun()
+
